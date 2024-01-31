@@ -4,9 +4,10 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-
+import frc.robot.RobotContainer;
 import frc.robot.Constants.DriveTrainConstants;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -25,12 +26,18 @@ public class DriveTrain extends SubsystemBase {
     m_leftMotor2.follow(m_leftMotor1);
     m_rightMotor2.follow(m_rightMotor1);
 
-    m_rightMotor1.setInverted(true);
+  
+  }
+  public void arcade ( double x, double y){
+    m_Drive.arcadeDrive(x, y);
+  }
 
-    m_leftMotor1.set(DriveTrainConstants.LEFT_MOTOR_1_SPEED);
-    m_leftMotor2.set(DriveTrainConstants.LEFT_MOTOR_2_SPEED);
-    m_rightMotor1.set(DriveTrainConstants.RIGHT_MOTOR_1_SPEED);
-    m_rightMotor2.set(DriveTrainConstants.RIGHT_MOTOR_2_SPEED);
+  public Command hu (){
+    return run(
+      () -> {
+      arcade(RobotContainer.m_drivercontroller.getLeftX()*.6 , (RobotContainer.m_drivercontroller.getLeftTriggerAxis() -RobotContainer.m_drivercontroller.getRightTriggerAxis()));
+      }
+  );
   }
 
   @Override

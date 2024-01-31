@@ -22,7 +22,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private DriveTrain m_DriveTrain = new DriveTrain();
   
-  private CommandXboxController m_drivercontroller = 
+  public static CommandXboxController m_drivercontroller = 
       new CommandXboxController(Constants.OperatorConstants.XBOX_CONTROLLER_PORT);
 
   private CommandXboxController m_secondcontroller = 
@@ -31,6 +31,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     configureBindings();
+    m_DriveTrain.setDefaultCommand(m_DriveTrain.hu());
 
   }
 
